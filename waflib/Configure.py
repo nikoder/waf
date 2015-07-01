@@ -239,7 +239,7 @@ class ConfigurationContext(Context.Context):
 		Load Waf tools, which will be imported whenever a build is started.
 
 		:param input: waf tools to import
-		:type input: list of string
+		:type input: list of string or space separated string
 		:param tooldir: paths for the imports
 		:type tooldir: list of string
 		:param funs: functions to execute from the waf tools

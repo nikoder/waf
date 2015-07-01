@@ -11,7 +11,7 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys, os, re
+import sys, os, re, importlib
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -180,7 +180,7 @@ lst = [x.replace('.py', '') for x in os.listdir('../../waflib/Tools/') if x.ends
 for x in lst:
 	if x == '__init__':
 		continue
-	tool = __import__('waflib.Tools.%s' % x)
+	tool = importlib.import_module('waflib.Tools.%s' % x)
 
 	mod = tool.__dict__['Tools'].__dict__[x]
 	dc = mod.__all__ = list(mod.__dict__.keys())
@@ -278,7 +278,7 @@ lst = [x.replace('.py', '') for x in os.listdir('../../waflib/Tools/') if x.ends
 for x in lst:
 	if x == '__init__':
 		continue
-	tool = __import__('waflib.Tools.%s' % x)
+	tool = importlib.import_module('waflib.Tools.%s' % x)
 
 	mod = tool.__dict__['Tools'].__dict__[x]
 	dc = mod.__all__ = list(mod.__dict__.keys())

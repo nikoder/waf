@@ -6,7 +6,7 @@
 Classes and functions required for waf commands
 """
 
-import os, re, imp, sys
+import os, re, imp, sys, importlib
 from waflib import Utils, Errors, Logs
 import waflib.Node
 
@@ -645,7 +645,7 @@ def load_tool(tool, tooldir=None, ctx=None):
 		assert isinstance(tooldir, list)
 		sys.path = tooldir + sys.path
 		try:
-			__import__(tool)
+			importlib.import_module(tool)
 			ret = sys.modules[tool]
 			Context.tools[tool] = ret
 			return ret
@@ -655,12 +655,12 @@ def load_tool(tool, tooldir=None, ctx=None):
 	else:
 		for x in ('waflib.Tools.%s', 'waflib.extras.%s', 'waflib.%s', '%s'):
 			try:
-				__import__(x % tool)
+				importlib.import_module(x % tool)
 				break
 			except ImportError:
 				x = None
 		if x is None: # raise an exception
-			__import__(tool)
+			importlib.import_module(tool)
 		ret = sys.modules[x % tool]
 		Context.tools[tool] = ret
 		return ret

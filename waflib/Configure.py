@@ -260,7 +260,7 @@ class ConfigurationContext(Context.Context):
 
 			module = None
 			try:
-				module = Context.load_tool(tool, tooldir, ctx=self)
+				module = Context.load_tool(tool, tooldir)
 			except ImportError as e:
 				self.fatal('Could not load the Waf tool %r from %r\n%s' % (tool, sys.path, e))
 			except Exception as e:
